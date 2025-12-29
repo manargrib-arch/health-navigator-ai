@@ -52,10 +52,10 @@ export function Footer() {
                 <Mail className="w-4 h-4" />
                 contact@labnet.dz
               </a>
-              <a href="tel:+213555123456" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
+              <span className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
-                +213 555 123 456
-              </a>
+                +213 ** ** ** **
+              </span>
               <span className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
                 Alger, Algérie

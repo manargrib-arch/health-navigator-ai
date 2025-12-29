@@ -16,159 +16,17 @@ import {
   ArrowRight,
   ChevronDown
 } from "lucide-react";
+import { analyses, specialties, specialtyColors } from "@/data/analyses";
 
-const specialties = [
-  { id: "all", name: "Toutes", icon: FlaskConical, count: 500 },
-  { id: "hematologie", name: "Hématologie", icon: Droplets, count: 45, color: "hematology" },
-  { id: "biochimie", name: "Biochimie", icon: FlaskConical, count: 78, color: "biochemistry" },
-  { id: "microbiologie", name: "Microbiologie", icon: Bug, count: 52, color: "microbiology" },
-  { id: "hormonologie", name: "Hormonologie", icon: Activity, count: 63, color: "hormonology" },
-  { id: "immunologie", name: "Immunologie", icon: Shield, count: 41, color: "immunology" },
-  { id: "genetique", name: "Génétique", icon: Dna, count: 28, color: "genetics" },
-];
-
-const analyses = [
-  {
-    id: "nfs",
-    name: "NFS (Numération Formule Sanguine)",
-    code: "NFS",
-    specialty: "hematologie",
-    specialtyName: "Hématologie",
-    description: "Mesure les différentes cellules du sang : globules rouges, blancs et plaquettes. Essentiel pour dépister anémie, infections et troubles de la coagulation.",
-    sampleType: "Sang veineux",
-    delay: "24h",
-    frequency: "très courante",
-  },
-  {
-    id: "glycemie",
-    name: "Glycémie à jeun",
-    code: "GLY",
-    specialty: "biochimie",
-    specialtyName: "Biochimie",
-    description: "Mesure le taux de sucre dans le sang après 8h de jeûne. Indispensable pour le diagnostic et le suivi du diabète.",
-    sampleType: "Sang veineux",
-    delay: "2h",
-    frequency: "très courante",
-  },
-  {
-    id: "hba1c",
-    name: "HbA1c (Hémoglobine glyquée)",
-    code: "HBA1C",
-    specialty: "biochimie",
-    specialtyName: "Biochimie",
-    description: "Reflète la glycémie moyenne des 3 derniers mois. Marqueur clé du contrôle du diabète.",
-    sampleType: "Sang veineux",
-    delay: "24h",
-    frequency: "courante",
-  },
-  {
-    id: "tsh",
-    name: "TSH (Thyréostimuline)",
-    code: "TSH",
-    specialty: "hormonologie",
-    specialtyName: "Hormonologie",
-    description: "Hormone de régulation de la thyroïde. Premier test pour évaluer le fonctionnement thyroïdien.",
-    sampleType: "Sang veineux",
-    delay: "24h",
-    frequency: "très courante",
-  },
-  {
-    id: "bilan-lipidique",
-    name: "Bilan Lipidique Complet",
-    code: "BLC",
-    specialty: "biochimie",
-    specialtyName: "Biochimie",
-    description: "Cholestérol total, HDL, LDL et triglycérides. Évalue le risque cardiovasculaire.",
-    sampleType: "Sang veineux",
-    delay: "24h",
-    frequency: "très courante",
-  },
-  {
-    id: "crp",
-    name: "CRP (Protéine C Réactive)",
-    code: "CRP",
-    specialty: "biochimie",
-    specialtyName: "Biochimie",
-    description: "Marqueur sensible d'inflammation. Augmente en cas d'infection ou d'inflammation aiguë.",
-    sampleType: "Sang veineux",
-    delay: "2h",
-    frequency: "très courante",
-  },
-  {
-    id: "vitamine-d",
-    name: "Vitamine D (25-OH)",
-    code: "VIT-D",
-    specialty: "biochimie",
-    specialtyName: "Biochimie",
-    description: "Évalue le statut en vitamine D, essentielle pour la santé osseuse et l'immunité.",
-    sampleType: "Sang veineux",
-    delay: "48h",
-    frequency: "courante",
-  },
-  {
-    id: "ferritine",
-    name: "Ferritine sérique",
-    code: "FER",
-    specialty: "hematologie",
-    specialtyName: "Hématologie",
-    description: "Reflète les réserves en fer de l'organisme. Utile pour diagnostiquer carences ou surcharges.",
-    sampleType: "Sang veineux",
-    delay: "24h",
-    frequency: "courante",
-  },
-  {
-    id: "ecbu",
-    name: "ECBU (Examen Cytobactériologique des Urines)",
-    code: "ECBU",
-    specialty: "microbiologie",
-    specialtyName: "Microbiologie",
-    description: "Recherche d'infection urinaire. Identifie les bactéries et teste leur sensibilité aux antibiotiques.",
-    sampleType: "Urines",
-    delay: "48-72h",
-    frequency: "très courante",
-  },
-  {
-    id: "groupe-sanguin",
-    name: "Groupe Sanguin ABO + Rhésus",
-    code: "GS-RH",
-    specialty: "hematologie",
-    specialtyName: "Hématologie",
-    description: "Détermine le groupe sanguin et le facteur Rhésus. Indispensable pour transfusions et grossesse.",
-    sampleType: "Sang veineux",
-    delay: "24h",
-    frequency: "courante",
-  },
-  {
-    id: "psa",
-    name: "PSA (Antigène Prostatique Spécifique)",
-    code: "PSA",
-    specialty: "hormonologie",
-    specialtyName: "Hormonologie",
-    description: "Marqueur tumoral prostatique. Utilisé pour le dépistage et le suivi du cancer de la prostate.",
-    sampleType: "Sang veineux",
-    delay: "24h",
-    frequency: "courante",
-  },
-  {
-    id: "transaminases",
-    name: "Transaminases (ASAT/ALAT)",
-    code: "ASAT-ALAT",
-    specialty: "biochimie",
-    specialtyName: "Biochimie",
-    description: "Enzymes hépatiques qui augmentent en cas de souffrance du foie. Bilan hépatique de base.",
-    sampleType: "Sang veineux",
-    delay: "24h",
-    frequency: "très courante",
-  },
-];
-
-const specialtyColors: Record<string, string> = {
-  hematologie: "bg-hematology text-hematology-light",
-  biochimie: "bg-biochemistry text-biochemistry-light",
-  microbiologie: "bg-microbiology text-microbiology-light",
-  hormonologie: "bg-hormonology text-hormonology-light",
-  immunologie: "bg-immunology text-immunology-light",
-  genetique: "bg-genetics text-genetics-light",
+const specialtyIcons: Record<string, typeof FlaskConical> = {
+  all: FlaskConical,
+  hematologie: Droplets,
+  biochimie: FlaskConical,
+  microbiologie: Bug,
+  hormonologie: Activity,
+  immunologie: Shield,
+  genetique: Dna,
+  cytologie: Dna,
 };
 
 export default function AnalysesPage() {
@@ -250,6 +108,17 @@ export default function AnalysesPage() {
                         selectedSpecialty === specialty.id
                           ? "bg-primary text-primary-foreground"
                           : "hover:bg-secondary text-foreground"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        {(() => {
+                          const Icon = specialtyIcons[specialty.id] || FlaskConical;
+                          return <Icon className="w-4 h-4" />;
+                        })()}
+                        {specialty.name}
+                      </div>
+                      <span className="text-xs opacity-70">{specialty.count}</span>
+                    </button>
                       }`}
                     >
                       <div className="flex items-center gap-3">
