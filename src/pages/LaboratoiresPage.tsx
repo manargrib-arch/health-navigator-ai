@@ -16,13 +16,20 @@ import {
   TestTubes
 } from "lucide-react";
 
+// Fonction pour masquer le numéro de téléphone (affiche seulement les 3 premiers chiffres)
+const maskPhone = (phone: string) => {
+  const digits = phone.replace(/\D/g, '');
+  const prefix = digits.slice(0, 3);
+  return `+${prefix} ** ** ** **`;
+};
+
 const laboratories = [
   {
     id: "1",
     name: "Laboratoire Central Alger",
     address: "123 Rue Didouche Mourad, Alger Centre",
     wilaya: "Alger",
-    phone: "+213 21 XX XX XX",
+    phone: "+213 21 45 67 89",
     rating: 4.8,
     reviews: 234,
     hours: "7h00 - 19h00",
@@ -37,7 +44,7 @@ const laboratories = [
     name: "Lab Bio Express",
     address: "45 Boulevard Mohamed V, Oran",
     wilaya: "Oran",
-    phone: "+213 41 XX XX XX",
+    phone: "+213 41 23 45 67",
     rating: 4.6,
     reviews: 156,
     hours: "6h30 - 20h00",
@@ -52,7 +59,7 @@ const laboratories = [
     name: "Laboratoire Pasteur Constantine",
     address: "78 Avenue de l'ALN, Constantine",
     wilaya: "Constantine",
-    phone: "+213 31 XX XX XX",
+    phone: "+213 31 98 76 54",
     rating: 4.9,
     reviews: 312,
     hours: "7h00 - 18h00",
@@ -67,7 +74,7 @@ const laboratories = [
     name: "Centre d'Analyses Médicales Annaba",
     address: "12 Rue de la Liberté, Annaba",
     wilaya: "Annaba",
-    phone: "+213 38 XX XX XX",
+    phone: "+213 38 12 34 56",
     rating: 4.5,
     reviews: 98,
     hours: "7h30 - 17h30",
@@ -210,7 +217,7 @@ export default function LaboratoiresPage() {
                     </div>
                     <div className="flex items-center gap-1">
                       <Phone className="w-4 h-4" />
-                      {lab.phone}
+                      {maskPhone(lab.phone)}
                     </div>
                   </div>
 
